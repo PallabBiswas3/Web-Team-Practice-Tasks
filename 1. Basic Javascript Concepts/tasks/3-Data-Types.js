@@ -9,28 +9,28 @@ let out;
 
 out = 42;
 // type:
-// typeof output:
+// typeof output:number
 out = 3.1416;
 // type:
-// typeof output:
+// typeof output:number
 out = 'Manga';
 // type:
-// typeof output:
+// typeof output:string
 out = false;
 // type:
-// typeof output:
+// typeof output:boolean
 out = null;
 // type:
-// typeof output:
+// typeof output:object
 out = undefined;
 // type:
-// typeof output:
+// typeof output:undefined
 out = [];
 // type:
-// typeof output:
+// typeof output:object
 out = {};
 // type:
-// typeof output:
+// typeof output:object
 out = new Error();
 // type:
-// typeof output:
+// typeof output:object

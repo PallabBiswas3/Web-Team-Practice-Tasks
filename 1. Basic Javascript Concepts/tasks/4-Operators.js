@@ -9,60 +9,60 @@ let out;
 
 // Arithmetic Operations
 out = 3 + 3;
-// Value: 
+// Value:6
 out = 3 + '3';
-// Value: 
+// Value:'33'
 out = '3' + 3;
-// Value: 
+// Value: '33'
 out = '3' + '3';
-// Value: 
+// Value: '33'
 out = [1, 5] + [2, 3];
-// Value: 
+// Value: '1,52,3'
 out = { a : 3 } + { b : 2 };
-// Value: 
+// Value: '[object Object][object Object]'
 out = 3 - '3';
-// Value: 
+// Value: 0
 out = 'A' - 5;
-// Value: 
+// Value: NaN
 out = '6' - '5';
-// Value: 
+// Value: 1
 out = '153' * '3';
-// Value: 
+// Value: 459
 out = ['123'] * '15';
-// Value: 
+// Value: 1845
 out = 7 / 5;
-// Value: 
+// Value: 1.4
 out = 413 / [['7']];
-// Value: 
+// Value: 59
 out = 265 % 13;
-// Value: 
+// Value: 5
 
 // Logical Operations
 out = undefined || 0;
-// Value: 
+// Value: 0
 out = 0 || undefined;
-// Value: 
+// Value: undefined
 out = undefined || 1;
-// Value: 
+// Value: 1
 out = 15 || undefined;
-// Value: 
+// Value: 15
 out = undefined && 0;
-// Value: 
+// Value: undefined
 out = 0 && undefined;
-// Value: 
+// Value: 0
 out = undefined && 1;
-// Value: 
+// Value: undefined
 out = 15 && undefined;
-// Value: 
+// Value: undefined
 out = ['1'] || 1;
-// Value: 
+// Value: ['1']
 out = [] || 1;
-// Value: 
+// Value: []
 out = { a : 1 } || 1;
-// Value: 
+// Value: { a : 1 }
 out = {} || 1;
-// Value: 
+// Value: {}
 out = (1 || false) && 'Error';
-// Value: 
+// Value: 'Error'
 out = (0 || false) && 'Error'
-// Value: 
+// Value: false
