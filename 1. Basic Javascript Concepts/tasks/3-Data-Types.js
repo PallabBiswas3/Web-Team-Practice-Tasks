@@ -8,29 +8,29 @@ Task:
 let out;
 
 out = 42;
-// type:
+// type:integer
 // typeof output:number
 out = 3.1416;
-// type:
+// type:float
 // typeof output:number
 out = 'Manga';
-// type:
+// type:string
 // typeof output:string
 out = false;
-// type:
+// type:boolean
 // typeof output:boolean
 out = null;
-// type:
+// type:object
 // typeof output:object
 out = undefined;
-// type:
+// type:undefined
 // typeof output:undefined
 out = [];
-// type:
+// type:array
 // typeof output:object
 out = {};
-// type:
+// type:dictionary
 // typeof output:object
 out = new Error();
-// type:
+// type:object
 // typeof output:object
