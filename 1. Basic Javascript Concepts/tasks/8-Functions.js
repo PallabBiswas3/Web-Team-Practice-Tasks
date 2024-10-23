@@ -21,8 +21,11 @@ that you use the arrow function notation generally.
 
 const titleCase = (str) => {
 				const words = str.toLowerCase().split(" ");
-				if (words.length > 0) {
-					words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+
+				for (let i = 0; i < words.length; i++) {
+					if (words[i].length > 0) {
+						words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+					}
 				}
 
 				return words.join(" ");
@@ -43,4 +46,9 @@ const logger = (...args) => {
 					console.log(args[i]);	
 				}
 			};
+function logger() {
+    for (let i = 0; i < arguments.length; i++) {
+        console.log(arguments[i]);
+    }
+}
 
