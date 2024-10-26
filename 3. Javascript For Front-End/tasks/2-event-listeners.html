@@ -100,16 +100,18 @@
 				/*
 								c. On clicking the "Check" button, the span contaiing the task text will have a class
 								`checked` added/removed as per the original condition.*/
-				const DoList = document.getElementById("to-do-list");
-				DoList.addEventListener("click", (event) => {
-					if (event.target.classList.contains("checked")) {
-						event.target.classList.remove("checked");
-						event.target.innerText = "Check";
-					} else {
-						event.target.classList.add("checked");
-						event.target.innerText = "Checked";
-					}
-				});
+				document
+					.getElementById("to-do-list")
+					.addEventListener("click", (event) => {
+						if (event.target.classList.contains("check-item-button")) {
+							event.target.classList.toggle("checked");
+							event.target.innerText = event.target.classList.contains(
+								"checked"
+							)
+								? "Unchecked"
+								: "Check";
+						}
+					});
 
 				/*
 				d. On clicking the "Delete" button, the to-do item will be removed from the list.*/
