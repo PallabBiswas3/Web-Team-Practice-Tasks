@@ -1,104 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title> Task 2: Event Listeners </title>
-	<style>
-		body {
-			height: 100vh;
-			background-repeat: no-repeat;
-			background-image: linear-gradient(-45deg, #9cdcec, #9cb4ec, #ac9cec, #d49cec, #ec9cdc);
-		}
-		#to-do {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		#task-add-container {
-			margin: 20px;
-		}
-		#to-do-list {
-			width: 70%;
-			padding: 30px;
-			border: 2px solid black;
-			border-radius: 12px;
-			background-color: rgba(65, 65, 65, 0.226);
-			margin: 10px;
-		}
-		.to-do-item {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			padding: 10px;
-			border: black 1px solid;
-			border-radius: 6px;
-			margin: 10px
-		}
-		button {
-			font-size: 14px;
-			padding: 10px;
-			border-radius: 6px;
-			border: 1px solid black;
-		}
-		input {
-			height: 32px;
-			width: 350px;
-		}
-	</style>
-	<script>
-		/* Eventlisteners over on-event functions: 
-			Enter why you think one of them is better over the other.
-		*/
-		window.addEventListener('load', () => {
-			/* 
-			Task:
-			Define the functions of each interactible field as per the given instructions.
-				a. The Task Input field should add the text (if any) in it to the to-do list on clicking "Enter" while typing.
-				b. The "Add Task" button must do the same as above.
-				c. On clicking the "Check" button, the span contaiing the task text will have a class 
-				`checked` added/removed as per the original condition.
-				d. On clicking the "Delete" button, the to-do item will be removed from the list.
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Task 2: Event Listeners</title>
+		<style>
+			body {
+				height: 100vh;
+				background-repeat: no-repeat;
+				background-image: linear-gradient(
+					-45deg,
+					#9cdcec,
+					#9cb4ec,
+					#ac9cec,
+					#d49cec,
+					#ec9cdc
+				);
+			}
+			#to-do {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			#task-add-container {
+				margin: 20px;
+			}
+			#to-do-list {
+				width: 70%;
+				padding: 30px;
+				border: 2px solid black;
+				border-radius: 12px;
+				background-color: rgba(65, 65, 65, 0.226);
+				margin: 10px;
+			}
+			.to-do-item {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				justify-content: space-between;
+				padding: 10px;
+				border: black 1px solid;
+				border-radius: 6px;
+				margin: 10px;
+			}
+			button {
+				font-size: 14px;
+				padding: 10px;
+				border-radius: 6px;
+				border: 1px solid black;
+			}
+			input {
+				height: 32px;
+				width: 350px;
+			}
+		</style>
+		<script>
+			/* Eventlisteners over on-event functions:
+							Enter why you think one of them is better over the other.
+						*/
+			window.addEventListener("load", () => {
+				/*
+							Task:
+							Define the functions of each interactible field as per the given instructions.*/
+				function addTask() {
+					const taskInput = document.getElementById("task-input");
+					if (taskInput.value !== "") {
+						const task = document.createElement("div");
+						task.classList.add("to-do-item");
+						task.innerHTML = `
+													<span class="task-text">${taskInput.value}</span>
+													<div class="buttons">
+														<button class="check-item-button">Check</button>
+														<button class="delet-item-button">Delete</button>
+													</div>
+												`;
+						const toDoList = document.getElementById("to-do-list");
+						toDoList.appendChild(task);
+						taskInput.value = "";
+					} else {
+						alert("Please enter a task");
+					}
+				}
+				/*Instructions:
+								a. The Task Input field should add the text (if any) in it to the to-do list on clicking "Enter" while typing.*/
+				const taskInput = document.getElementById("task-input");
+				taskInput.addEventListener("keyup", (event) => {
+					if (event.key === "Enter") {
+						addTask();
+					}
+				});
+
+				/*
+								b. The "Add Task" button must do the same as above.
+								*/
+				const addTaskButton = document.getElementById("add-task");
+				addTaskButton.addEventListener("click", () => {
+					addTask();
+				});
+				/*
+								c. On clicking the "Check" button, the span contaiing the task text will have a class
+								`checked` added/removed as per the original condition.*/
+				const DoList = document.getElementById("to-do-list");
+				DoList.addEventListener("click", (event) => {
+					if (event.target.classList.contains("checked")) {
+						event.target.classList.remove("checked");
+						event.target.innerText = "Check";
+					} else {
+						event.target.classList.add("checked");
+						event.target.innerText = "Checked";
+					}
+				});
+
+				/*
+				d. On clicking the "Delete" button, the to-do item will be removed from the list.*/
+				const toDoList = document.getElementById("to-do-list");
+				toDoList.addEventListener("click", (event) => {
+					if (event.target.classList.contains("delet-item-button")) {
+						event.target.parentElement.parentElement.remove(); // Remove the corresponding item
+					}
+				});
+
+				/*
 				e. On clicking "Export", the whole To-Do list will be copied to the clipboard. Each item will be separated by a newline.
 				Note: If a task is completed, it will be enclosed between two tilde (~). For Example: ~~Bully Goose for Work~~
-			*/
-		});
-	</script>
-</head>
-<body>
-	<div id="root">
-		<!-- Task 1 HTML -->
-		<div id="to-do">
-			<div id="task-add-container">
-				<input type="text" placeholder="Enter a Task" id="task-input">
-				<button id="add-task"> Add Task </button>
+							*/
+				const exportButton = document.getElementById("export");
+				exportButton.addEventListener("click", () => {
+					const toDoList = document.getElementById("to-do-list");
+					const tasks = toDoList.querySelectorAll(".task-text");
+					let taskList = "";
+					tasks.forEach((task) => {
+						const button = task.parentElement.querySelector(
+							".buttons .check-item-button"
+						);
+						if (button.classList.contains("checked")) {
+							let taskText = "~~" + task.innerText + "~~";
+							taskList += taskText + "\n";
+						} else {
+							taskList += task.innerText + "\n";
+						}
+					});
+					navigator.clipboard
+						.writeText(taskList)
+						.then(() => {
+							console.log("Task list copied to clipboard!");
+							alert("Task list copied to clipboard!");
+						})
+						.catch((err) => {
+							console.error("Failed to copy: ", err);
+							alert("Failed to copy: " + err);
+						});
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="root">
+			<!-- Task 1 HTML -->
+			<div id="to-do">
+				<div id="task-add-container">
+					<input type="text" placeholder="Enter a Task" id="task-input" />
+					<button id="add-task">Add Task</button>
+				</div>
+				<div id="to-do-list">
+					<div class="to-do-item">
+						<span class="task-text"> Finish Javascript Tasks </span>
+						<div class="buttons">
+							<button class="check-item-button">Check</button>
+							<button class="delet-item-button">Delete</button>
+						</div>
+					</div>
+					<div class="to-do-item">
+						<span class="task-text"> Finish React Tutorials </span>
+						<div class="buttons">
+							<button class="check-item-button">Check</button>
+							<button class="delet-item-button">Delete</button>
+						</div>
+					</div>
+					<div class="to-do-item">
+						<span class="task-text"> Get Treat from Ankan </span>
+						<div class="buttons">
+							<button class="check-item-button">Check</button>
+							<button class="delet-item-button">Delete</button>
+						</div>
+					</div>
+				</div>
+				<button id="export">Export List</button>
 			</div>
-			<div id="to-do-list">
-				<div class="to-do-item">
-					<span class="task-text"> Finish Javascript Tasks </span>
-					<div class="buttons">
-						<button class="check-item-button"> Check  </button>
-						<button class="delet-item-button"> Delete </button>
-					</div>
-				</div>
-				<div class="to-do-item">
-					<span class="task-text"> Finish React Tutorials </span>
-					<div class="buttons">
-						<button class="check-item-button"> Check  </button>
-						<button class="delet-item-button"> Delete </button>
-					</div>
-				</div>
-				<div class="to-do-item">
-					<span class="task-text"> Get Treat from Ankan </span>
-					<div class="buttons">
-						<button class="check-item-button"> Check  </button>
-						<button class="delet-item-button"> Delete </button>
-					</div>
-				</div>
-			</div>
-			<button id="export"> Export List </button>
 		</div>
-	</div>
-</body>
+	</body>
 </html>

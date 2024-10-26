@@ -1,81 +1,128 @@
 <!DOCTYPE html>
 <!-- Check the bottom of the page to see the topics which are recommended to know about. -->
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Task 1: DOM</title>
-	<style>
-		body {
-			height: 100vh;
-			background-repeat: no-repeat;
-			background-image: linear-gradient(-45deg, #9cdcec, #9cb4ec, #ac9cec, #d49cec, #ec9cdc);
-		}
-		#root {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-		}
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin: 20px;
-		}
-		button {
-			font-size: 16px;
-			margin-top: 10px;
-			width: 100px;
-			height: 40px;
-		}
-		h1 {
-			margin-top: 100px;
-		}
-		.button-off {
-			background-color: rgb(253, 43, 16)
-		}
-		.button-off:hover {
-			background-color: rgb(204, 33, 33)
-		}
-		.button-on {
-			background-color: rgb(0, 255, 0)
-		}
-		.button-on:hover {
-			background-color: rgb(19, 199, 49)
-		}
-	</style>
-	<script>
-		/*
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Task 1: DOM</title>
+		<style>
+			body {
+				height: 100vh;
+				background-repeat: no-repeat;
+				background-image: linear-gradient(
+					-45deg,
+					#9cdcec,
+					#9cb4ec,
+					#ac9cec,
+					#d49cec,
+					#ec9cdc
+				);
+			}
+			#root {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin: 20px;
+			}
+			button {
+				font-size: 16px;
+				margin-top: 10px;
+				width: 100px;
+				height: 40px;
+			}
+			h1 {
+				margin-top: 100px;
+			}
+			.button-off {
+				background-color: rgb(253, 43, 16);
+			}
+			.button-off:hover {
+				background-color: rgb(204, 33, 33);
+			}
+			.button-on {
+				background-color: rgb(0, 255, 0);
+			}
+			.button-on:hover {
+				background-color: rgb(19, 199, 49);
+			}
+		</style>
+		<script>
+			/*
 		Task: 
 		1. For all instances of buttons with the class button-off, a function `switchOnOff` is executed when the button is clicked
 		Define `switchOnOff` such that the button switches between:
 			a. class: button-off, text: Off
-			b. class: button-on , text: On
-		
-		2. Define a function `changeColor` such that the background color of the div with the id `tile` changes on click
+			b. class: button-on , text: On */
+			const switchOnOff = () => {
+				const button = event.target;
+				if (button.classList.contains("button-off")) {
+					button.classList.replace("button-off", "button-on");
+					button.innerText = "On";
+				} else {
+					button.classList.replace("button-on", "button-off");
+					button.innerText = "Off";
+				}
+			};
+
+			// const SwitchOnOff = (x) => {
+			// 	if(x.classList.contains("button-off")){
+			// 		x.classList.replace("button-off", "button-on");
+			// 		x.innerText = "On";
+			// 	}else{
+			// 		x.classList.replace("button-on", "button-off");
+			// 		x.innerText = "Off";
+			// 	}
+			// 	}
+			//<button class="button-off" onclick="switchOnOff(this)">Off</button>
+			//<button class="button-off" onclick="switchOnOff(this)">Off</button>
+
+			/*2. Define a function `changeColor` such that the background color of the div with the id `tile` changes on click
 		The background color of the div goes on a loop, defined by the array `colorList`.
 		*/
-		const colorList = ['red', 'cyan', 'green', 'blue', 'yellow', 'teal', 'brown'];
-	</script>
-</head>
-<body>
-	<div id="root">
-		<!-- Task 1 HTML -->
-		<div class="container">
-			<h1>Switch Board</h1>
-			<div class="buttons">
-				<button class="button-off" onclick="switchOnOff()"> Off </button>
-				<button class="button-off" onclick="switchOnOff()"> Off </button>
+
+			const colorList = [
+				"red",
+				"cyan",
+				"green",
+				"blue",
+				"yellow",
+				"teal",
+				"brown",
+			];
+
+			const changeColor = () => {
+				const tile = document.getElementById("tile");
+				const index = colorList.indexOf(tile.style.backgroundColor);
+				tile.style.backgroundColor = colorList[(index + 1) % colorList.length];
+			};
+		</script>
+	</head>
+	<body>
+		<div id="root">
+			<!-- Task 1 HTML -->
+			<div class="container">
+				<h1>Switch Board</h1>
+				<div class="buttons">
+					<button class="button-off" onclick="switchOnOff()">Off</button>
+					<button class="button-off" onclick="switchOnOff()">Off</button>
+				</div>
+			</div>
+
+			<!-- Task 2 HTML -->
+			<div class="container">
+				<div
+					id="tile"
+					style="width: 200px; height: 200px; background-color: yellow"
+				></div>
+				<button id="change-color" onclick="changeColor()">Change Color</button>
 			</div>
 		</div>
-
-		<!-- Task 2 HTML -->
-		<div class="container">
-			<div id="tile" style="width: 200px; height: 200px; background-color: yellow;">  </div>
-			<button id="change-color" onclick="changeColor()"> Change Color </button>
-		</div>
-	</div>
-</body>
+	</body>
 </html>
 
 <!--

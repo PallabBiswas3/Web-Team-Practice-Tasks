@@ -21,22 +21,33 @@ Task:
 
 // Do not edit the code until mentioned
 
-const { writeFile } = require('fs').promises;
+const coinFlipPromise = () => {
+	return new Promise((resolve, reject) => {
+		setTimeout(() => {
+			const result = Math.random() < 0.5 ? 'Heads' : 'Tails';
+			resolve(result);
+		}, Math.random() * 2400 + 2600);
+	});
+}
+// Write your code over here. Make sure to comment before each part.
 
-const coinFlipPromise = () => new Promise((resolve, reject) => {
-	setTimeout(() => resolve(Math.random() >= 0.5 ? 'Heads' : 'Tails'),
-	(2.6 + 2.4 * Math.random()) * 1_000);
-});
-
-const responseHandler = payload => {
-	fetch(URL, {
-		method: 'POST',
-		body: JSON.stringify(payload)
-	}).then(response => response.json())
-	.then(body => {
-		console.log(body);
-		return Promise.resolve(body.message)
-	}).then(message => writeFile('output.txt', JSON.stringify(message)));
+// 1. Define `coinFlips` function to perform `n` coin flips sequentially with random time delays
+const coinFlips = async (n) => {
+    for (let i = 0; i < n; i++) {
+        const result = await coinFlipPromise(); // Wait for each flip to complete
+        console.log(result); // Display the result (either "Heads" or "Tails")
+    }
 };
 
-// Write your code over here. Make sure to comment before each part.
+
+// 2. Rewrite `responseHandler` as an async function `asyncResponseHandler`
+async function asyncResponseHandler() {
+    try {
+        const response = await fetch("url");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log("The request ended in an error.");
+    }
+}
+

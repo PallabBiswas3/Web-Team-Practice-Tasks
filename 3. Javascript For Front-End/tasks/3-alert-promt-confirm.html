@@ -1,71 +1,101 @@
 <!DOCTYPE html>
 <!-- Check the bottom of the page to see the topics which are recommended to know about. -->
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Task 3: Popup Boxes</title>
-    <style>
-        body {
-			height: 100vh;
-			background-repeat: no-repeat;
-			background-image: linear-gradient(-45deg, #9cdcec, #9cb4ec, #ac9cec, #d49cec, #ec9cdc);
-		}
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 50px;
-        }
-        #info {
-            color: brown;
-            font-weight: 600;
-        }
-        button {
-            font-size: 14px;
-            height: 40px;
-            margin: 10px;
-            padding: 10px;
-        }
-    </style>
-	<script>
-		/*
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Task 3: Popup Boxes</title>
+		<style>
+			body {
+				height: 100vh;
+				background-repeat: no-repeat;
+				background-image: linear-gradient(
+					-45deg,
+					#9cdcec,
+					#9cb4ec,
+					#ac9cec,
+					#d49cec,
+					#ec9cdc
+				);
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				margin: 50px;
+			}
+			#info {
+				color: brown;
+				font-weight: 600;
+			}
+			button {
+				font-size: 14px;
+				height: 40px;
+				margin: 10px;
+				padding: 10px;
+			}
+		</style>
+		<script>
+			/*
 		Task: 
 		1. Define a function `hello()` which gets called when the button "Say Hello" is clicked.
-        It'll give an alert saying "Hello from MASK"
-
-        2. Define a function `choose(ele)` which will set the innerHTML of the div with ID `information` to "So you like `choice`..... hmmmmmmmm".
-        When the function is called, it'll only change the text if user confirms his action. (Use the confirm popup box).
-
-        3. Define a function `submitName()` which will show a promt to the user "Enter your name".
+        It'll give an alert saying "Hello from MASK"*/
+			const hello = () => {
+				alert("Hello from MASK");
+			};
+			/*2. Define a function `choose(ele)` which will set the innerHTML of the div with ID `information` to "So you like `choice`..... hmmmmmmmm".
+        When the function is called, it'll only change the text if user confirms his action. (Use the confirm popup box).*/
+			const choose = (ele) => {
+				let choice = ele.innerHTML;
+				if (confirm(`So you like ${choice}..... hmmmmmmmm`)) {
+					document.getElementById(
+						"favourite"
+					).innerHTML = `So you like ${choice}..... hmmmmmmmm`;
+					document.getElementById("favourite").style.display = "block";
+				}
+			};
+			/*3. Define a function `submitName()` which will show a promt to the user "Enter your name".
         If the user fills the name, display "Hello `name`, Welcome to the club" in the div with ID `info`.
         */
-	</script>
-</head>
-<body>
-	<div id="root">
-        <!-- Task 1: Alert -->
-		<div class="container">
-            <h1>Welcome to MASK</h1>
-            <button onclick="hello()">Say Hello</button>
-        </div>
+			const submitName = () => {
+				let name = prompt("Enter your name");
+				if (name) {
+					document.getElementById(
+						"info"
+					).innerHTML = `Hello ${name}, Welcome to the club`;
+					document.getElementById("info").style.display = "block";
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="root">
+			<!-- Task 1: Alert -->
+			<div class="container">
+				<h1>Welcome to MASK</h1>
+				<button onclick="hello()">Say Hello</button>
+			</div>
 
-        <!-- Task 2: Confirm -->
-        <div class="container">
-            <h2>Choose your thing -</h2>
-            <div class="choices">
-                <button class="choice" onclick="choose(this)">Anime</button>
-                <button class="choice" onclick="choose(this)">Man(ga/hua/hwa)</button>
-            </div>
-            <div id="favourite" style="display: none;">So you like Anime..... hmmmmmmmm</div>
-        </div>
+			<!-- Task 2: Confirm -->
+			<div class="container">
+				<h2>Choose your thing -</h2>
+				<div class="choices">
+					<button class="choice" onclick="choose(this)">Anime</button>
+					<button class="choice" onclick="choose(this)">Man(ga/hua/hwa)</button>
+				</div>
+				<div id="favourite" style="display: none">
+					So you like Anime..... hmmmmmmmm
+				</div>
+			</div>
 
-        <!-- Task 3: Prompt -->
-        <div class="container">
-            <h3>Click here to enter your name</h3>
-            <button onclick="submitName()">Submit</button>
-            <div id="info" style="display: none;">Hello Goos, Welcome to the club</div>
-        </div>
-	</div>
-</body>
+			<!-- Task 3: Prompt -->
+			<div class="container">
+				<h3>Click here to enter your name</h3>
+				<button onclick="submitName()">Submit</button>
+				<div id="info" style="display: none">
+					Hello Goos, Welcome to the club
+				</div>
+			</div>
+		</div>
+	</body>
 </html>
