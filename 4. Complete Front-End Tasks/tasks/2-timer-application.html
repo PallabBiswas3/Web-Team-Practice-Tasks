@@ -64,8 +64,19 @@
 			function startTimer() {
 				if (interval) clearInterval(interval);
 				const time = timerInput.value || "00:00:00";
-				const [h, m, s] = time.split(":").map(Number);
-				remainingSeconds = h * 3600 + m * 60 + s;
+				const count = time.split(":").length - 1;
+				console.log(`Number of colons: ${count}`);
+
+				if (count === 2) {
+					const [h, m, s] = time.split(":").map(Number);
+					remainingSeconds = h * 3600 + m * 60 + s;
+				} else if (count === 1) {
+					const [m, s] = time.split(":").map(Number);
+					remainingSeconds = m * 60 + s;
+				} else {
+					remainingSeconds = time;
+				}
+
 				if (remainingSeconds > 0) {
 					pauseButton.disabled = false;
 					timerInput.value = ""; // Clear input after starting
